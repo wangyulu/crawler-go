@@ -10,9 +10,14 @@ import (
 	"golang.org/x/net/html/charset"
 	"golang.org/x/text/encoding/unicode"
 	url2 "net/url"
+	"time"
 )
 
+// 相隔10毫秒
+var rateLimit = time.Tick(10 * time.Microsecond)
+
 func Fetch(url string) ([]byte, error) {
+	<-rateLimit
 	urlNew, _ := url2.Parse(url)
 	client := http.Client{}
 	req := &http.Request{
