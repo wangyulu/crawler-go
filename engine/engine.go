@@ -17,7 +17,7 @@ func Run(sends ...Request) {
 
 		body, err := fetcher.Fetch(r.Url)
 		if err != nil {
-			log.Printf("Fetcher:err url %s:%v", r.Url, err)
+			log.Printf("Fetcher-err url: %s; err: %v", r.Url, err)
 			continue
 		}
 
@@ -25,7 +25,7 @@ func Run(sends ...Request) {
 		requests = append(requests, parserRes.Requests...)
 
 		for _, item := range parserRes.Items {
-			log.Printf("item %q", item)
+			log.Printf("item %v", item)
 		}
 	}
 

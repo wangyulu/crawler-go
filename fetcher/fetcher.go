@@ -9,10 +9,20 @@ import (
 	"bufio"
 	"golang.org/x/net/html/charset"
 	"golang.org/x/text/encoding/unicode"
+	url2 "net/url"
 )
 
 func Fetch(url string) ([]byte, error) {
-	resp, err := http.Get(url)
+	urlNew, _ := url2.Parse(url)
+	client := http.Client{}
+	req := &http.Request{
+		URL: urlNew,
+		Header: map[string][]string{
+			"User-Agent": {"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"},
+		},
+	}
+	resp, err := client.Do(req)
+	//resp, err := http.Get(url)
 	if err != nil {
 		return nil, err
 	}
