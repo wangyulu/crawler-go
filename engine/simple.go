@@ -13,6 +13,7 @@ func (e SimpleEngine) Run(sends ...Request) {
 		requests = append(requests, r)
 	}
 
+	itemCount := 0
 	for len(requests) > 0 {
 		r := requests[0]
 		requests = requests[1:]
@@ -24,7 +25,8 @@ func (e SimpleEngine) Run(sends ...Request) {
 		requests = append(requests, parserRes.Requests...)
 
 		for _, item := range parserRes.Items {
-			log.Printf("item %v", item)
+			log.Printf("item #%d : %v", itemCount, item)
+			itemCount++
 		}
 	}
 }
